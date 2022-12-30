@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const OlvyWidget = (props) => {
   useEffect(() => {
@@ -17,12 +17,8 @@ const OlvyWidget = (props) => {
       console.log(e);
     }
   });
-  
-  return (
-    <>
-     {props.targetElement}
-    </>
-  );
+
+  return props.targetElement;
 };
-const OlvyUtils = window.OlvyUtils
-export {OlvyWidget,OlvyUtils}
+const OlvyUtils = window.OlvyUtils;
+export { OlvyWidget, OlvyUtils };
