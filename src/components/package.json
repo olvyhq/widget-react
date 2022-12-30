@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "React component for olvy feedback and announcement widgets",
   "main": "OlvyWidget.js",
+  "repository":"https://github.com/olvyhq/olvy-widget-react.git",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
