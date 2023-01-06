@@ -9,8 +9,8 @@ function App() {
      
       config={{ workspaceAlias: "olvysdktest" }}
       targetElement={<div>
-      <div id="olvy-whats-new">testing</div>
-      <div id="olvy-feedback">testing feedback widget</div>
+      <div id="olvy-whats-new">Announcement Widget</div>
+      <div id="olvy-feedback">Feedback Widget</div>
       </div>  
     }
     ></OlvyWidget>
