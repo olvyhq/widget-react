@@ -1,70 +1,211 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# @olvyhq/widget-react
 
-## Available Scripts
+This react component allows you to easily include Olvy widgets in your React applications. The component takes care of all the necessary set up and configuration, allowing you to simply specify which Olvy widget you want to use and any relevant options. 
 
-In the project directory, you can run:
 
-### `npm start`
+![Logo](https://olvy-development.s3.amazonaws.com/public_images/olvy-react.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+https://codesandbox.io/s/olvy-widget-react-icif8y
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Install @olvyhq/widget-react with npm
 
-### `npm run build`
+```bash
+  npm install @olvyhq/widget-react
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    
+## Usage/Examples
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+In main.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+import {OlvyWidget,OlvyUtils} from  "@olvyhq/widget-react"
+```
+#### How to use 
 
-### `npm run eject`
+```javascript
+ <OlvyWidget
+      config={<Configuration> }
+      targetElement={<div>
+      <div <css-selector> ></div>
+      </div>  
+    }
+    ></OlvyWidget>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+//Replace <css-selector> with the css selector you configured for target element in Olvy and <Configuration> with your configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Example
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+ <OlvyWidget
+      config={{workspaceAlias: "olvysdktest"}}
+      targetElement={<div>
+      <div id="olvy-whats-new">Announcement Widget</div>
+      </div>  
+    }>
+    </OlvyWidget>
+```
+#### Configuration
+```javascript
+{
+    widgetId:"",   // (optional)
+    workspaceAlias:""  //(required)
+}
+```
 
-## Learn More
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Optional**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Methods
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+#### To show widget
 
-### Analyzing the Bundle Size
+```javascript
+OlvyUtils.showWidget(workspaceAlias,widgetAliasOrID)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
 
-### Making a Progressive Web App
+#### To hide widget
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```javascript
+OlvyUtils.hideWidget(workspaceAlias,widgetAliasOrID)
+```
 
-### Advanced Configuration
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### To set user
 
-### Deployment
+```javascript
+OlvyUtils.setUser(workspaceAlias, userObject) 
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `userObject` | `object` | **Required**.  |
 
-### `npm run build` fails to minify
+#### To set feedback meta info
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```javascript
+OlvyUtils.setFeedbackMetaInfo (workspaceAlias, metaInfo)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `metaInfo` | `object` | **Required**. |
+
+#### To refresh unread count
+
+```javascript
+OlvyUtils.refreshUnreadCount(workspaceAlias,widgetAliasOrID) 
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To show unread releases count
+
+```javascript
+OlvyUtils.getUnreadReleasesCount(workspaceAlias,widgetAliasOrID)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To remove unread indicator element
+
+```javascript
+OlvyUtils.removeUnreadIndicatorElement(workspaceAlias,widgetAliasOrID)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To add unread indicator element
+
+```javascript
+OlvyUtils.addUnreadIndicatorElement(workspaceAlias,widgetAliasOrID, count) 
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To get last opened timestamp
+
+```javascript
+OlvyUtils.getLastOpenedTimestamp(workspaceAlias,widgetAliasOrID)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To refresh the widget
+
+```javascript
+OlvyUtils.refresh(workspaceAlias,widgetAliasOrID)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To teardown the widget
+
+```javascript
+OlvyUtils.teardown(workspaceAlias,widgetAliasOrID)
+```
+
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `widgetAliasOrID` | `string` | **Required**. widget Id or alias ( you can find it on widget details page in olvy dashbaord ) |
+
+#### To create feedback
+
+```javascript
+OlvyUtils.createFeedback(workspaceAlias,params)
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `workspaceAlias` | `string` | **Required**. Your subdomain |
+| `params` | `object` | **Required**.  |
+
+
+
+## Tests
+
+```bash
+  npm run test
+```

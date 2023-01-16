@@ -32,12 +32,12 @@ import {OlvyWidget,OlvyUtils} from  "@olvyhq/widget-react"
  <OlvyWidget
       config={<Configuration> }
       targetElement={<div>
-      <div id="<Target-Element-Id>"></div>
+      <div <css-selector> ></div>
       </div>  
     }
     ></OlvyWidget>
 
-//Replace <Target-Element-Id> with your target element id and <Configuration> with your configuration
+//Replace <css-selector> with the css selector you configured for target element in Olvy and <Configuration> with your configuration
 
 ```
 
@@ -207,5 +207,5 @@ OlvyUtils.createFeedback(workspaceAlias,params)
 ## Tests
 
 ```bash
-  npm run test:unit
+  npm run test
 ```

@@ -1,7 +1,7 @@
 {
   "name": "@olvyhq/widget-react",
-  "version": "0.1.1",
-  "description": "React component for olvy feedback and announcement widgets",
+  "version": "0.1.3",
+  "description": "This react component allows you to easily include Olvy widgets in your React applications. The component takes care of all the necessary set up and configuration, allowing you to simply specify which Olvy widget you want to use and any relevant options. ",
   "main": "OlvyWidget.js",
   "repository": {
     "type": "git",
