@@ -1,0 +1,23 @@
+{
+  "name": "@olvyhq/widget-react",
+  "version": "0.1.1",
+  "description": "React component for olvy feedback and announcement widgets",
+  "main": "OlvyWidget.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olvyhq/widget-react.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adhil Sha",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/olvyhq/widget-react/issues"
+  },
+  "homepage": "https://github.com/olvyhq/widget-react#readme",
+  "devDependencies": {}
+}

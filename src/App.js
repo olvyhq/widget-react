@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {OlvyWidget,OlvyUtils} from "./components/OlvyWidget";
+import {useRef} from "react"
 function App() {
+  const widgetRef = useRef()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <OlvyWidget
+     
+      config={{ workspaceAlias: "olvysdktest" }}
+      targetElement={<div>
+      <div id="olvy-whats-new" className="button">Announcement Widget</div>
+      <div id="olvy-feedback" className="button">Feedback Widget</div>
+      </div>  
+    }
+    ></OlvyWidget>
+  
+  
     </div>
   );
+  
 }
 
 export default App;
