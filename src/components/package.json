@@ -2,12 +2,14 @@
   "name": "@olvyhq/widget-react",
   "version": "0.1.4",
   "description": "React component for olvy feedback and announcement widgets",
-  "main": "OlvyWidget.js",
+  "main": "./dist/OlvyWidget.js",
+  "types":"./dist/OlvyWidget.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/olvyhq/widget-react.git"
   },
   "scripts": {
+    "build": "babel OlvyWidget.js -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adhil Sha",
