@@ -1,45 +1,34 @@
-import { useEffect } from "react";
+import React, { Component } from "react";
 
-const OlvyWidget = (props) => {
-  useEffect(() => {
+class OlvyWidget extends Component {
+  componentDidMount() {
+    this.loadScript();
+  }
+
+  async loadScript() {
     try {
-      async function loadScript() {
-        if (window) {
-          // make sure the script loads
-          await getOlvyUtils();
+      if (window) {
+        // make sure the script loads
+        await this.getOlvyUtils();
 
-          // if workspace alias, initialize
-          if (props.config.workspaceAlias && window.Olvy) {
-            let foundOlvyInstance = window.OlvyInstances.find(
-              (instance) =>
-                instance.workspaceAlias === props.config.workspaceAlias
-            );
-            // if olvyInstance not found, we create one
-            if (!foundOlvyInstance) {
-              new window.Olvy(props.config.workspaceAlias);
-            }
+        // if workspace alias, initialize
+        if (this.props.config.workspaceAlias && window.Olvy) {
+          let foundOlvyInstance = window.OlvyInstances.find(
+            (instance) =>
+              instance.workspaceAlias === this.props.config.workspaceAlias
+          );
+          // if olvyInstance not found, we create one
+          if (!foundOlvyInstance) {
+            new window.Olvy(this.props.config.workspaceAlias);
           }
         }
       }
-
-      loadScript();
-
-      // if (document) {
-      //   let olvyScript = document.createElement("script");
-      //   olvyScript.setAttribute("src", "https://app.olvy.co/scriptV2.js");
-      //   document.head.appendChild(olvyScript);
-      // }
-      // if (window) {
-      //   window.addEventListener("load", () => {
-      //     window.OlvyConfig = props.config;
-      //   });
-      // }
     } catch (e) {
       console.log(e);
     }
-  });
+  }
 
-  function getLoadedOlvyScript() {
+  getLoadedOlvyScript() {
     let olvyScript = document.getElementById("olvyScriptV2");
 
     if (olvyScript) {
@@ -49,23 +38,23 @@ const OlvyWidget = (props) => {
     }
   }
 
-  async function getOlvyUtils() {
+  async getOlvyUtils() {
     if (window?.OlvyUtils) {
       return window.OlvyUtils;
     } else {
       // Wait for the script to load before returning the utils object
-      await olvyScriptLoader();
+      await this.olvyScriptLoader();
 
       // script adds utils to window, we just return utils after ensuring script load
       return window.OlvyUtils;
     }
   }
 
-  async function olvyScriptLoader() {
+  async olvyScriptLoader() {
     // Create a Promise that resolves when the script is loaded
     return new Promise((resolve, reject) => {
       if (!window.OlvyUtils) {
-        let createdOlvyScript = getLoadedOlvyScript();
+        let createdOlvyScript = this.getLoadedOlvyScript();
 
         // if script isn't already created by some other olvy-widget, we create one
         if (!createdOlvyScript) {
@@ -98,7 +87,10 @@ const OlvyWidget = (props) => {
     });
   }
 
-  return props.targetElement;
-};
+  render() {
+    return this.props.targetElement;
+  }
+}
+
 const OlvyUtils = window.OlvyUtils;
 export { OlvyWidget, OlvyUtils };
