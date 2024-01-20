@@ -1,11 +1,19 @@
 import "./App.css";
-import { OlvyWidget, OlvyUtils } from "./components/OlvyWidget";
-import { useRef } from "react";
+import { OlvyWidget } from "./components/OlvyWidget";
+
 function App() {
-  const widgetRef = useRef();
+  // Callback function to set OlvyUtils when it's loaded
+  const onOlvyUtilsLoad = (olvyUtils) => {
+    // use the olvyUtils functions here
+    // setTimeout(() => {
+    //   olvyUtils.showWidget("olvysdktest", "stupefied_buck_CMnyh");
+    // }, 2000);
+  };
+
   return (
     <div id="olvy-widget-container">
       <OlvyWidget
+        onOlvyUtilsLoad={onOlvyUtilsLoad}
         config={{ workspaceAlias: "olvysdktest" }}
         targetElement={
           <div>
