@@ -1,6 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
+
+let OlvyUtils = window?.OlvyUtils;
 
 class OlvyWidget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scriptLoaded: false,
+    };
+  }
+
   componentDidMount() {
     this.loadScript();
   }
@@ -9,7 +18,7 @@ class OlvyWidget extends Component {
     try {
       if (window) {
         // make sure the script loads
-        await this.getOlvyUtils();
+        OlvyUtils = await this.getOlvyUtils();
 
         // if workspace alias, initialize
         if (this.props.config.workspaceAlias && window.Olvy) {
@@ -46,14 +55,14 @@ class OlvyWidget extends Component {
       await this.olvyScriptLoader();
 
       // script adds utils to window, we just return utils after ensuring script load
-      return window.OlvyUtils;
+      return window?.OlvyUtils;
     }
   }
 
   async olvyScriptLoader() {
     // Create a Promise that resolves when the script is loaded
     return new Promise((resolve, reject) => {
-      if (!window.OlvyUtils) {
+      if (!window?.OlvyUtils) {
         let createdOlvyScript = this.getLoadedOlvyScript();
 
         // if script isn't already created by some other olvy-widget, we create one
@@ -62,7 +71,15 @@ class OlvyWidget extends Component {
           script.id = "olvyScriptV2";
           script.src = "https://app.olvy.co/scriptV2.js";
           script.onload = () => {
-            // The script is loaded, so resolve the Promise
+            this.setState({ scriptLoaded: true });
+            OlvyUtils = window?.OlvyUtils;
+
+            // Call the callback function when OlvyUtils is loaded
+            if (OlvyUtils && this.props.onOlvyUtilsLoad) {
+              this.props.onOlvyUtilsLoad(OlvyUtils);
+            }
+
+            // The script is loafded, so resolve the Promise
             resolve(true);
           };
           script.onerror = () => {
@@ -73,6 +90,14 @@ class OlvyWidget extends Component {
         } else {
           // script was already created, just listen for onload
           createdOlvyScript.onload = () => {
+            this.setState({ scriptLoaded: true });
+            OlvyUtils = window?.OlvyUtils;
+
+            // Call the callback function when OlvyUtils is loaded
+            if (OlvyUtils && this.props.onOlvyUtilsLoad) {
+              this.props.onOlvyUtilsLoad(OlvyUtils);
+            }
+
             // The script is loaded, so resolve the Promise
             resolve(true);
           };
@@ -92,5 +117,4 @@ class OlvyWidget extends Component {
   }
 }
 
-const OlvyUtils = window.OlvyUtils;
 export { OlvyWidget, OlvyUtils };
