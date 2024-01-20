@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-let OlvyUtils = window.OlvyUtils;
+let OlvyUtils = window?.OlvyUtils;
 
 class OlvyWidget extends Component {
   constructor(props) {
@@ -48,21 +48,21 @@ class OlvyWidget extends Component {
   }
 
   async getOlvyUtils() {
-    if (window.OlvyUtils) {
+    if (window?.OlvyUtils) {
       return window.OlvyUtils;
     } else {
       // Wait for the script to load before returning the utils object
       await this.olvyScriptLoader();
 
       // script adds utils to window, we just return utils after ensuring script load
-      return window.OlvyUtils;
+      return window?.OlvyUtils;
     }
   }
 
   async olvyScriptLoader() {
     // Create a Promise that resolves when the script is loaded
     return new Promise((resolve, reject) => {
-      if (!window.OlvyUtils) {
+      if (!window?.OlvyUtils) {
         let createdOlvyScript = this.getLoadedOlvyScript();
 
         // if script isn't already created by some other olvy-widget, we create one
@@ -72,14 +72,14 @@ class OlvyWidget extends Component {
           script.src = "https://app.olvy.co/scriptV2.js";
           script.onload = () => {
             this.setState({ scriptLoaded: true });
-            OlvyUtils = window.OlvyUtils;
+            OlvyUtils = window?.OlvyUtils;
 
             // Call the callback function when OlvyUtils is loaded
             if (OlvyUtils && this.props.onOlvyUtilsLoad) {
               this.props.onOlvyUtilsLoad(OlvyUtils);
             }
 
-            // The script is loaded, so resolve the Promise
+            // The script is loafded, so resolve the Promise
             resolve(true);
           };
           script.onerror = () => {
@@ -91,7 +91,7 @@ class OlvyWidget extends Component {
           // script was already created, just listen for onload
           createdOlvyScript.onload = () => {
             this.setState({ scriptLoaded: true });
-            OlvyUtils = window.OlvyUtils;
+            OlvyUtils = window?.OlvyUtils;
 
             // Call the callback function when OlvyUtils is loaded
             if (OlvyUtils && this.props.onOlvyUtilsLoad) {
