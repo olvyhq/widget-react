@@ -1,6 +1,15 @@
-import React, { Component } from "react";
+import { Component } from "react";
+
+let OlvyUtils = window.OlvyUtils;
 
 class OlvyWidget extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      scriptLoaded: false,
+    };
+  }
+
   componentDidMount() {
     this.loadScript();
   }
@@ -9,7 +18,7 @@ class OlvyWidget extends Component {
     try {
       if (window) {
         // make sure the script loads
-        await this.getOlvyUtils();
+        OlvyUtils = await this.getOlvyUtils();
 
         // if workspace alias, initialize
         if (this.props.config.workspaceAlias && window.Olvy) {
@@ -39,7 +48,7 @@ class OlvyWidget extends Component {
   }
 
   async getOlvyUtils() {
-    if (window?.OlvyUtils) {
+    if (window.OlvyUtils) {
       return window.OlvyUtils;
     } else {
       // Wait for the script to load before returning the utils object
@@ -62,6 +71,14 @@ class OlvyWidget extends Component {
           script.id = "olvyScriptV2";
           script.src = "https://app.olvy.co/scriptV2.js";
           script.onload = () => {
+            this.setState({ scriptLoaded: true });
+            OlvyUtils = window.OlvyUtils;
+
+            // Call the callback function when OlvyUtils is loaded
+            if (OlvyUtils && this.props.onOlvyUtilsLoad) {
+              this.props.onOlvyUtilsLoad(OlvyUtils);
+            }
+
             // The script is loaded, so resolve the Promise
             resolve(true);
           };
@@ -73,6 +90,14 @@ class OlvyWidget extends Component {
         } else {
           // script was already created, just listen for onload
           createdOlvyScript.onload = () => {
+            this.setState({ scriptLoaded: true });
+            OlvyUtils = window.OlvyUtils;
+
+            // Call the callback function when OlvyUtils is loaded
+            if (OlvyUtils && this.props.onOlvyUtilsLoad) {
+              this.props.onOlvyUtilsLoad(OlvyUtils);
+            }
+
             // The script is loaded, so resolve the Promise
             resolve(true);
           };
@@ -92,5 +117,4 @@ class OlvyWidget extends Component {
   }
 }
 
-const OlvyUtils = window.OlvyUtils;
 export { OlvyWidget, OlvyUtils };
