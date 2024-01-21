@@ -40,6 +40,26 @@ import {OlvyWidget,OlvyUtils} from  "@olvyhq/widget-react"
 //Replace <Target-Element-Id> with your target element id and <Configuration> with your configuration
 
 ```
+#### Use OlvyUtils
+```
+// Callback function to use OlvyUtils when it's loaded
+  const onOlvyUtilsLoad = (olvyUtils) => {
+    // use the olvyUtils functions here
+     setTimeout(() => {
+       olvyUtils.showWidget("olvysdktest", "stupefied_buck_CMnyh");
+    }, 2000);
+  };
+
+// use the component & specify the callback function
+ <OlvyWidget
+      onOlvyUtilsLoad={onOlvyUtilsLoad}
+      config={<Configuration> }
+      targetElement={<div>
+      <div id="<Target-Element-Id>"></div>
+      </div>  
+    }
+    ></OlvyWidget>
+```
 
 #### Example
 
