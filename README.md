@@ -10,7 +10,7 @@ This react component allows you to easily include Olvy widgets in your React app
 
 https://codesandbox.io/s/olvy-widget-react-icif8y
 <br>
-Updated (v0.1.9) https://stackblitz-starters-cbnfty.stackblitz.io
+Updated (v0.1.9) [https://stackblitz-starters-cbnfty.stackblitz.io](https://stackblitz.com/edit/stackblitz-starters-cbnfty?file=src%2FApp.tsx)
 
 ## Installation
 
