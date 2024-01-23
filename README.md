@@ -9,6 +9,8 @@ This react component allows you to easily include Olvy widgets in your React app
 ## Demo
 
 https://codesandbox.io/s/olvy-widget-react-icif8y
+<br>
+Updated (v0.1.9) https://stackblitz-starters-cbnfty.stackblitz.io
 
 ## Installation
 
@@ -24,12 +26,13 @@ Install @olvyhq/widget-react with npm
 In main.js
 
 ```javascript
-import {OlvyWidget,OlvyUtils} from  "@olvyhq/widget-react"
+import {OlvyWidget} from  "@olvyhq/widget-react"
 ```
 #### How to use 
 
 ```javascript
  <OlvyWidget
+      onReady={onOlvyReady}
       config={<Configuration> }
       targetElement={<div>
       <div id="<Target-Element-Id>"></div>
@@ -39,18 +42,31 @@ import {OlvyWidget,OlvyUtils} from  "@olvyhq/widget-react"
 
 //Replace <Target-Element-Id> with your target element id and <Configuration> with your configuration
 
+// You can use onReady prop to provide a callback function to perform some actions when the widget is ready
 ```
 
 #### Example
 
 ```javascript
  <OlvyWidget
+      onReady={onOlvyReady}
       config={{workspaceAlias: "olvysdktest"}}
       targetElement={<div>
       <div id="olvy-whats-new">Announcement Widget</div>
       </div>  
     }>
     </OlvyWidget>
+```
+<br>
+
+```javascript
+  // Callback function to use OlvyUtils when it's loaded
+  const onOlvyUtilsLoad = (olvyUtils) => {
+    // use the olvyUtils functions here
+    setTimeout(() => {
+      olvyUtils.showWidget(workspaceAlias,widgetAliasOrID);
+    }, 1000);
+  };
 ```
 #### Configuration
 ```javascript
