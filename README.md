@@ -61,7 +61,7 @@ import {OlvyWidget} from  "@olvyhq/widget-react"
 
 ```javascript
   // Callback function to use OlvyUtils when it's loaded
-  const onOlvyUtilsLoad = (olvyUtils) => {
+  const onOlvyReady = (olvyUtils) => {
     // use the olvyUtils functions here
     setTimeout(() => {
       olvyUtils.showWidget(workspaceAlias,widgetAliasOrID);
