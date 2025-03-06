@@ -14,7 +14,7 @@ function App() {
     <div id="olvy-widget-container">
       <OlvyWidget
         onOlvyUtilsLoad={onOlvyUtilsLoad}
-        config={{ workspaceAlias: "olvysdktest" }}
+        config={{ workspaceAlias: "olvysdktest", widgetId: "" }}
         targetElement={
           <div>
             <div id="olvy-whats-new">Announcement Widget</div>
