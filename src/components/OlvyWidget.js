@@ -28,7 +28,10 @@ class OlvyWidget extends Component {
           );
           // if olvyInstance not found, we create one
           if (!foundOlvyInstance) {
-            new window.Olvy(this.props.config.workspaceAlias);
+            new window.Olvy(this.props.config.workspaceAlias, {
+              ...this.props.config.options,
+              widgetId: this.props.config.widgetId,
+            });
           }
         }
       }
