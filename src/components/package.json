@@ -1,6 +1,6 @@
 {
   "name": "@olvyhq/widget-react",
-  "version": "0.1.4",
+  "version": "0.2.2",
   "description": "React component for olvy feedback and announcement widgets",
   "main": "./dist/OlvyWidget.js",
   "types": "./dist/OlvyWidget.d.ts",
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.3",
-    "@babel/preset-env": "^7.23.3"
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-typescript": "^7.26.0"
   }
 }
